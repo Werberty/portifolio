@@ -6,6 +6,8 @@ class Desenvolvedor(models.Model):
     sobrenome = models.CharField(max_length=250)
     titulo = models.CharField(max_length=250)
     descricao = models.TextField()
+    foto = models.ImageField(
+        upload_to='dev/perfil/', blank=True, default='')
 
     def __str__(self) -> str:
         return f'{self.nome} {self.sobrenome}'
@@ -36,7 +38,8 @@ class Habilidade(models.Model):
     desenvolvedor = models.ForeignKey(
         Desenvolvedor, on_delete=models.SET_NULL,
         null=True, blank=True, related_name='habilidades')
-    projetos = models.ManyToManyField(Projeto, related_name='tecnologias')
+    projetos = models.ManyToManyField(
+        Projeto, related_name='tecnologias', blank=True)
 
     def __str__(self) -> str:
         return self.nome

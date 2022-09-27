@@ -13,63 +13,65 @@
 
 <body>
     <header>
-        <h1>Werberty</h1>
+        <h1>{{ desenvolvedor.nome }}</h1>
         <nav>
             <a href="#inicio">Início</a>
             <a href="#sobre">Sobre</a>
             <a href="#projetos">Projetos</a>
-            <a href="#habilidades">habilidades</a>
+            <a href="#habilidades">Habilidades</a>
             <a href="#contato">Contato</a>
         </nav>
     </header>
     <main>
         <section id="inicio">
-            <h1>Werberty Alexandre</h1>
-            <p>Desenvolvedor Backend | Python | Django </p>
-            <img src="{% static 'portifolio/assets/foto-perfil.jpg' %}" alt="foto de perfil">
+            <h1>{{ desenvolvedor.nome }} {{ desenvolvedor.sobrenome }}</h1>
+            <p>{{ desenvolvedor.titulo }}</p>
+            <img src="{{ desenvolvedor.foto.url }}" alt="foto de perfil">
         </section>
         <section id="sobre">
             <h2>Sobre mim</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, atque a. Labore commodi consequuntur tenetur accusantium officiis delectus repellendus similique, alias maxime sed vero autem ullam. Harum eligendi id doloremque? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam omnis possimus facilis nisi magni deserunt at officia cum. Consequuntur molestias rerum harum nam itaque voluptates praesentium tempore at corrupti quaerat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, laudantium! Repellendus sed quas accusamus odit iure?</p>
+            <p>{{ desenvolvedor.descricao }}</p>
         </section>
         <section id="projetos">
             <h2>Projetos</h2>
             <ul>
-                <li>
-                    <h3>Cell Imports</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur perferendis nesciunt perspiciatis tenetur vitae, quidem, expedita voluptatibus ipsum corporis rerum ex tempore dignissimos? Odio unde atque inventore debitis delectus explicabo!</p>
-                </li>
-                <li>
-                    <h3>Site de Receitas</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur soluta laborum reiciendis quia sapiente et labore, officia tenetur magni impedit! Quam dignissimos itaque doloremque minus dolores. Aut eligendi in dignissimos?</p>
-                </li>
-                <li>
-                    <h3>Freelaway</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla qui, exercitationem, error dicta debitis tenetur porro unde minima quae, et aliquam sed. Fugiat nisi suscipit tempora ullam reprehenderit labore soluta.</p>
-                </li>
+                {% for projeto in projetos %}
+                    <li>
+                        <h3>{{ projeto.titulo }}</h3>
+                        {% for tecnologia in projeto.tecnologias.all %}
+                            <span>{{ tecnologia }} |</span>
+                        {% endfor %}
+                        <p>{{ projeto.descricao }}</p>
+                        <a href="{{ projeto.link_repositorio }}" target="_blank">Repositorio</a>
+                        {% if projeto.link_site %}
+                            <a href="{{ projeto.link_site }}">Ver site</a>
+                        {% else %}
+                            <a href="#projetos">Ver site</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
             </ul>
         </section>
         <section id="habilidades">
             <h2>Habilidades</h2>
             <h3>Tecnologias</h3>
             <ul>
-                <li>Python</li>
-                <li>Django</li>
-                <li>HTML5</li>
-                <li>CSS3</li>
-                <li>MySQL</li>
+                {% for hard_skill in hard_skills %}
+                    <li>{{ hard_skill }}</li>
+                {% endfor %}
             </ul>
             <h3>Soft Skills</h3>
             <ul>
-                <li>Dedicado</li>
-                <li>Comunicativo</li>
-                <li>Senço de coletividade</li>
-                <li>Responsavel</li>
+                {% for soft_skill in soft_skills %}
+                    <li>{{ soft_skill }}</li>
+                {% endfor %}
             </ul>
         </section>
         <section id="contato">
             <h2>Contato</h2>
-            <p><a href="#">Linkedin</a> <a href="#">GitHub</a> <a href="#">Isntagram</a></p>
+            {% for contato in contatos %}
+            <a href="{{ contato.link }}">{{ contato.nome }}</a>
+            {% endfor %}
         </section>
     </main>
     <footer>
