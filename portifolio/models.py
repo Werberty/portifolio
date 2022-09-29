@@ -1,3 +1,5 @@
+from hashlib import blake2b
+
 from django.db import models
 
 
@@ -37,6 +39,7 @@ class Habilidade(models.Model):
     nome = models.CharField(max_length=65)
     tipo = models.CharField(max_length=2, choices=SKILLS_CHOICHES)
     link = models.CharField(max_length=250, null=True, blank=True)
+    icone = models.CharField(max_length=65, null=True, blank=True)
     desenvolvedor = models.ForeignKey(
         Desenvolvedor, on_delete=models.SET_NULL,
         null=True, blank=True, related_name='habilidades')
