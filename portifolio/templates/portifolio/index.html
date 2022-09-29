@@ -14,19 +14,25 @@
 <body>
     <header>
         <nav>
-            <h1>{{ desenvolvedor.nome }}</h1>
-            <a href="#inicio">Início</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#projetos">Projetos</a>
-            <a href="#habilidades">Habilidades</a>
-            <a href="#contato">Contato</a>
+            <div class="nav-logo">
+                <h1>{{ desenvolvedor.nome }}</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#inicio">Início</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#habilidades">Habilidades</a>
+                <a href="#contato">Contato</a>
+            </div>
         </nav>
     </header>
     <main>
         <article>
             <section id="inicio">
-                <h1>{{ desenvolvedor.nome }} {{ desenvolvedor.sobrenome }}</h1>
-                <p>{{ desenvolvedor.titulo }}</p>
+                <div>
+                    <h1>{{ desenvolvedor.nome }} {{ desenvolvedor.sobrenome }}</h1>
+                    <p>{{ desenvolvedor.titulo }}</p>
+                </div>
                 <img src="{{ desenvolvedor.foto.url }}" alt="foto de perfil">
             </section>
             <section id="sobre">
@@ -35,23 +41,25 @@
             </section>
             <section id="projetos">
                 <h2>Projetos</h2>
-                <ul>
+                <div class="container-projeto">
                     {% for projeto in projetos %}
-                        <li>
                             <h3>{{ projeto.titulo }}</h3>
-                            {% for tecnologia in projeto.tecnologias.all %}
-                                <span>{{ tecnologia }} |</span>
-                            {% endfor %}
+                            <p>
+                                {% for tecnologia in projeto.tecnologias.all %}
+                                    <span>{{ tecnologia }} |</span>
+                                {% endfor %}
+                            </p>
                             <p>{{ projeto.descricao }}</p>
-                            <a href="{{ projeto.link_repositorio }}" target="_blank">Repositorio</a>
-                            {% if projeto.link_site %}
-                                <a href="{{ projeto.link_site }}">Ver site</a>
-                            {% else %}
-                                <a href="#projetos">Ver site</a>
-                            {% endif %}
-                        </li>
+                            <p>
+                                <a href="{{ projeto.link_repositorio }}" target="_blank">Repositorio</a>
+                                {% if projeto.link_site %}
+                                    <a href="{{ projeto.link_site }}">Ver site</a>
+                                {% else %}
+                                    <a href="#projetos">Ver site</a>
+                                {% endif %}
+                            </p>
                     {% endfor %}
-                </ul>
+                </div>
             </section>
             <section id="habilidades">
                 <h2>Habilidades</h2>
@@ -71,7 +79,7 @@
             <section id="contato">
                 <h2>Contato</h2>
                 {% for contato in contatos %}
-                <a href="{{ contato.link }}">{{ contato.nome }}</a>
+                <a href="{{ contato.link }}" target="_blank">{{ contato.nome }}</a>
                 {% endfor %}
             </section>
         </article>
