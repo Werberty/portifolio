@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'portifolio/assets/favicon-dev.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'portifolio/css/style.css' %}">
-    <title>Werberty</title>
+    <title>{{ desenvolvedor.nome }}</title>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="nav-logo">
+    <header class="header-container">
+        <nav class="navbar container">
+            {% comment %} <div class="nav-logo">
                 <h1>{{ desenvolvedor.nome }}</h1>
-            </div>
+            </div> {% endcomment %}
             <div class="nav-links">
                 <a href="#inicio">Início</a>
                 <a href="#sobre">Sobre</a>
@@ -26,67 +26,83 @@
             </div>
         </nav>
     </header>
-    <main>
-        <article>
+    <main class="main-container">
+        <article class="conteudo">
             <section id="inicio">
-                <div>
+                <div class="inicio-titulo">
                     <h1>{{ desenvolvedor.nome }} {{ desenvolvedor.sobrenome }}</h1>
                     <p>{{ desenvolvedor.titulo }}</p>
                 </div>
-                <img src="{{ desenvolvedor.foto.url }}" alt="foto de perfil">
             </section>
             <section id="sobre">
                 <h2>Sobre mim</h2>
-                <p>{{ desenvolvedor.descricao }}</p>
+                <div class="sobre-conteudo">
+                    <p>{{ desenvolvedor.descricao }}</p>
+                    <div>
+                        <img src="{{ desenvolvedor.foto.url }}" alt="foto de perfil">
+                    </div>
+                </div>
             </section>
             <section id="projetos">
                 <h2>Projetos</h2>
-                <div class="container-projeto">
+                <div class="projeto-conteudo">
                     {% for projeto in projetos %}
-                            <h3>{{ projeto.titulo }}</h3>
-                            <p>
-                                {% for tecnologia in projeto.tecnologias.all %}
-                                    <span>{{ tecnologia }} |</span>
-                                {% endfor %}
-                            </p>
-                            <p>{{ projeto.descricao }}</p>
-                            <p>
-                                <a href="{{ projeto.link_repositorio }}" target="_blank">Repositorio</a>
-                                {% if projeto.link_site %}
-                                    <a href="{{ projeto.link_site }}">Ver site</a>
-                                {% else %}
-                                    <a href="#projetos">Ver site</a>
-                                {% endif %}
-                            </p>
+                        <div class="projeto-cover">
+                            <img src="{{ projeto.capa.url }}" alt="cover 1">
+                        </div>
                     {% endfor %}
+                    <!-- {% for projeto in projetos %}
+                    <h3>{{ projeto.titulo }}</h3>
+                    <p>
+                        {% for tecnologia in projeto.tecnologias.all %}
+                        <span>{{ tecnologia }} |</span>
+                        {% endfor %}
+                    </p>
+                    <p>{{ projeto.descricao }}</p>
+                    <p>
+                        <a href="{{ projeto.link_repositorio }}" target="_blank">Repositorio</a>
+                        {% if projeto.link_site %}
+                        <a href="{{ projeto.link_site }}">Ver site</a>
+                        {% else %}
+                        <a href="#projetos">Ver site</a>
+                        {% endif %}
+                    </p>
+                    {% endfor %} -->
                 </div>
             </section>
             <section id="habilidades">
                 <h2>Habilidades</h2>
-                <h3>Tecnologias</h3>
-                <ul>
-                    {% for hard_skill in hard_skills %}
+                <div class="habilidades-tec-conteudo">
+                    <h3>Tecnologias</h3>
+                    <ul>
+                        {% for hard_skill in hard_skills %}
                         <li>{{ hard_skill }}</li>
-                    {% endfor %}
-                </ul>
-                <h3>Soft Skills</h3>
-                <ul>
-                    {% for soft_skill in soft_skills %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="habilidades-soft-conteudo">
+                    <h3>Soft Skills</h3>
+                    <ul>
+                        {% for soft_skill in soft_skills %}
                         <li>{{ soft_skill }}</li>
-                    {% endfor %}
-                </ul>
+                        {% endfor %}
+                    </ul>
+                </div>
             </section>
             <section id="contato">
                 <h2>Contato</h2>
-                {% for contato in contatos %}
-                <a href="{{ contato.link }}" target="_blank">{{ contato.nome }}</a>
-                {% endfor %}
+                <div class="contato-conteudo">
+                    {% for contato in contatos %}
+                    <a href="{{ contato.link }}" target="_blank">{{ contato.nome }}</a>
+                    {% endfor %}
+                </div>
             </section>
         </article>
     </main>
     <footer>
         <p>Desenvolvido por Werberty</p>
     </footer>
+    <p></p>
 </body>
 
 </html>

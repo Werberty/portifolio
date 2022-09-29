@@ -18,6 +18,8 @@ class Projeto(models.Model):
     descricao = models.TextField()
     link_repositorio = models.CharField(max_length=250)
     link_site = models.CharField(max_length=250, blank=True, null=True)
+    capa = models.ImageField(
+        upload_to='projeto/capa/', blank=True, default='')
     desenvolvedor = models.ForeignKey(
         Desenvolvedor, on_delete=models.SET_NULL,
         null=True, blank=True, related_name='projetos')
