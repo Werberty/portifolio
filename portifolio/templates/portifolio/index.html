@@ -10,7 +10,17 @@
     <link rel="stylesheet" href="{% static 'portifolio/css/style.css' %}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-          
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css"
+    integrity="sha512-xX2rYBFJSj86W54Fyv1de80DWBq7zYLn2z0I9bIhQG+rxIF6XVJUpdGnsNHWRa6AvP89vtFupEPDP8eZAtu9qA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/brands.min.css"
+    integrity="sha512-OivR4OdSsE1onDm/i3J3Hpsm5GmOVvr9r49K3jJ0dnsxVzZgaOJ5MfxEAxCyGrzWozL9uJGKz6un3A7L+redIQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css"
+    integrity="sha512-qzgHTQ60z8RJitD5a28/c47in6WlHGuyRvMusdnuWWBB6fZ0DWG/KyfchGSBlLVeqAz+1LzNq+gGZkCSHnSd3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>{{ desenvolvedor.nome }}</title>
 </head>
 
@@ -18,7 +28,7 @@
     <header class="header-container">
         <nav class="navbar container">
             {% comment %} <div class="nav-logo">
-                <h1>{{ desenvolvedor.nome }}</h1>
+                <h1>Portifolio</h1>
             </div> {% endcomment %}
             <div class="nav-links">
                 <a href="#inicio">Início</a>
@@ -52,6 +62,12 @@
                     {% for projeto in projetos %}
                         <div class="projeto-cover">
                             <img src="{{ projeto.capa.url }}" alt="cover 1">
+                            
+                            <div class="projeto-ico">
+                                <abbr title="Repositorio"><a href="{{ projeto.link_repositorio }}" target="_blank"><i class="fa-solid fa-link fa-lg"></i></i></a></abbr>
+
+                                <abbr title="Ver mais"><a href="#" target="_blank"><i class="fa-solid fa-eye fa-lg"></i></a></abbr>
+                            </div>
                         </div>
                     {% endfor %}
                     <!-- {% for projeto in projetos %}
@@ -80,7 +96,9 @@
                         <h3>Tecnologias</h3>
                         <ul>
                             {% for hard_skill in hard_skills %}
-                            <li><i class="{{ hard_skill.icone }}"></i> {{ hard_skill }}</li>
+                            <a href="{{ hard_skill.link }}" target="_blank">
+                                <li><i class="{{ hard_skill.icone }}"></i> {{ hard_skill }}</li>
+                            </a>
                             {% endfor %}
                         </ul>
                     </div>
@@ -96,9 +114,9 @@
             </article>
             <article id="contato">
                 <h2>Contato</h2>
-                <div class="contato-conteudo">
+                <div class="contato-conteudo container">
                     {% for contato in contatos %}
-                    <a href="{{ contato.link }}" target="_blank">{{ contato.nome }}</a>
+                    <abbr title="{{ contato.nome }}"><i class="{{ contato.icone }}"></i></abbr> <a href="{{ contato.link }}" target="_blank">{{ contato.nome }}</a>
                     {% endfor %}
                 </div>
             </article>

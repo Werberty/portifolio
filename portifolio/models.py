@@ -53,6 +53,7 @@ class Habilidade(models.Model):
 class Contato(models.Model):
     nome = models.CharField(max_length=65)
     link = models.CharField(max_length=250)
+    icone = models.CharField(max_length=65, null=True, blank=True)
     desenvolvedor = models.ForeignKey(
         Desenvolvedor, on_delete=models.SET_NULL,
         null=True, blank=True, related_name='contatos')
