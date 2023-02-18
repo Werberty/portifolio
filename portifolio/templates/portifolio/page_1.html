@@ -1,0 +1,17 @@
+<h3>Pessoas</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Sexo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pessoa in pessoas %}
+        <tr>
+            <td>{{ pessoa.nome }}</td>
+            <td>{{ pessoa.sexo }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

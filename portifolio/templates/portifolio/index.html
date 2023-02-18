@@ -45,6 +45,7 @@
                 <div class="inicio-titulo">
                     <h1>{{ desenvolvedor.nome }} {{ desenvolvedor.sobrenome }}</h1>
                     <p>{{ desenvolvedor.titulo }}</p>
+                    <button>CURRÍCULO</button>
                 </div>
             </article>
             <article id="sobre">
@@ -62,39 +63,31 @@
                     {% for projeto in projetos %}
                         <div class="projeto-cover">
                             <img src="{{ projeto.capa.url }}" alt="cover 1">
-                            
-                            <div class="projeto-ico">
-                                <abbr title="Repositorio"><a href="{{ projeto.link_repositorio }}" target="_blank"><i class="fa-solid fa-link fa-lg"></i></i></a></abbr>
-
-                                <abbr title="Ver mais"><a href="#" target="_blank"><i class="fa-solid fa-eye fa-lg"></i></a></abbr>
+                            <div class="container">
+                                <h3>{{ projeto.titulo }}</h3>
+                                <div class="tecs">
+                                    {% for tecnologia in projeto.tecnologias.all %}
+                                        <span>{{ tecnologia }} |</span>
+                                    {% endfor %}
+                                </div>
+                                <p>{{ projeto.descricao }}</p>
+                                <div class="projeto-ico">
+                                    <abbr title="Repositório"><a href="{{ projeto.link_repositorio }}" target="_blank"><i class="fa-brands fa-github fa-2x"></i></i></a></abbr>
+                                    <abbr title="Ver mais"><a href="#"><i class="fa-solid fa-eye fa-2x"></i></a></abbr>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}
-                    <!-- {% for projeto in projetos %}
-                    <h3>{{ projeto.titulo }}</h3>
-                    <p>
-                        {% for tecnologia in projeto.tecnologias.all %}
-                        <span>{{ tecnologia }} |</span>
-                        {% endfor %}
-                    </p>
-                    <p>{{ projeto.descricao }}</p>
-                    <p>
-                        <a href="{{ projeto.link_repositorio }}" target="_blank">Repositorio</a>
-                        {% if projeto.link_site %}
-                        <a href="{{ projeto.link_site }}">Ver site</a>
-                        {% else %}
-                        <a href="#projetos">Ver site</a>
-                        {% endif %}
-                    </p>
-                    {% endfor %} -->
                 </div>
+
+
             </article>
             <article id="habilidades">
                 <h2>Habilidades</h2>
                 <div class="habilidades-conteudo container">
                     <div class="habilidades-tec-conteudo">
-                        <h3>Tecnologias</h3>
-                        <ul>
+                        {% comment %} <h3>Tecnologias</h3> {% endcomment %}
+                        <ul class="habilidades-list">
                             {% for hard_skill in hard_skills %}
                             <a href="{{ hard_skill.link }}" target="_blank">
                                 <li><i class="{{ hard_skill.icone }}"></i> {{ hard_skill }}</li>
@@ -102,21 +95,21 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <div class="habilidades-soft-conteudo">
+                    {% comment %} <div class="habilidades-soft-conteudo">
                         <h3>Soft Skills</h3>
                         <ul>
                             {% for soft_skill in soft_skills %}
                             <li>{{ soft_skill }}</li>
                             {% endfor %}
                         </ul>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </article>
             <article id="contato">
                 <h2>Contato</h2>
                 <div class="contato-conteudo container">
                     {% for contato in contatos %}
-                    <abbr title="{{ contato.nome }}"><i class="{{ contato.icone }}"></i></abbr> <a href="{{ contato.link }}" target="_blank">{{ contato.nome }}</a>
+                    <abbr title="{{ contato.nome }}"><a href="{{ contato.link }}" target="_blank"><i class="{{ contato.icone }}"></i></abbr> </a>
                     {% endfor %}
                 </div>
             </article>
